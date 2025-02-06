@@ -1,6 +1,6 @@
 # K-Means Clustering 분석 앱
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.0%2B-red)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-latest-green)
 
