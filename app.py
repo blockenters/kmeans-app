@@ -1,4 +1,3 @@
-
 import pandas as pd
 import streamlit as st
 from pandas.api.types import is_integer_dtype, is_float_dtype, is_object_dtype
@@ -20,11 +19,29 @@ def fontRegistered():
 
 
 def main():
-
     fontRegistered()
     plt.rc('font', family='NanumGothic')
 
     st.title('K-Means Clustering App!!')
+    
+    # 앱 설명 추가
+    st.markdown("""
+    ### 📊 K-Means Clustering 분석 도구
+    
+    이 앱은 데이터를 업로드하여 K-Means 클러스터링 분석을 쉽게 수행할 수 있도록 도와주는 도구입니다.
+    
+    #### 사용 방법:
+    1. CSV 파일을 업로드합니다.
+    2. 클러스터링에 사용할 컬럼들을 선택합니다.
+    3. 최적의 클러스터 수(K)를 결정하기 위한 WCSS 그래프를 확인합니다.
+    4. 원하는 클러스터 수를 선택하여 그룹화 결과를 확인합니다.
+    
+    #### 주요 기능:
+    - 자동 데이터 전처리 (결측치 처리)
+    - 문자형/숫자형 데이터 자동 인코딩
+    - WCSS(Within Cluster Sum of Squares) 시각화
+    - 클러스터링 결과 데이터프레임 제공
+    """)
 
     # 1. csv file upload
     file = st.file_uploader('CSV 파일 업로드', type=['csv'])
