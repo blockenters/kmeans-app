@@ -49,10 +49,10 @@ def main():
     if file is not None:
         # 2. 데이터 불러오기
         df = pd.read_csv(file)
-        st.dataframe(df.head())
-        
+        st.dataframe( df.head() )
+
         st.info('Nan 이 있으면 행을 삭제합니다.')
-        st.dataframe(df.isna().sum())
+        st.dataframe( df.isna().sum() )
         df.dropna(inplace=True)
         df.reset_index(drop=True, inplace=True)
 
@@ -113,25 +113,16 @@ def main():
             kmeans.fit(df_new)
             wcss.append( kmeans.inertia_ )
 
-        # WCSS 시각화 섹션
-        st.markdown('<p class="step-header">STEP 4: 최적의 군집 수 결정</p>', unsafe_allow_html=True)
-        col1, col2 = st.columns([2, 1])
+        fig1 = plt.figure()
+        plt.plot( range(1, max_k+1) ,  wcss )
+        plt.title('The Elbow Method')
+        plt.xlabel('클러스터 갯수')
+        plt.ylabel('WCSS 값')
+        st.pyplot( fig1 ) 
         
-        with col1:
-            fig1 = plt.figure(figsize=(10, 6))
-            plt.plot(range(1, max_k+1), wcss, marker='o')
-            plt.title('The Elbow Method')
-            plt.xlabel('클러스터 갯수')
-            plt.ylabel('WCSS 값')
-            st.pyplot(fig1)
-        
-        with col2:
-            st.markdown("""
-            #### 엘보우 방법이란?
-            그래프가 꺾이는 지점(엘보우)이 
-            최적의 군집 수로 간주됩니다.
-            """)
-            k = st.number_input('군집 수 선택', min_value=2, max_value=max_k)
+    
+        st.text('원하는 클러스터링(그룹) 갯수를 입력하세요')
+        k = st.number_input('숫자 입력', min_value=2, max_value= max_k)
 
         kmeans = KMeans(n_clusters= k, random_state= 4)
         df['Group'] = kmeans.fit_predict(df_new)
